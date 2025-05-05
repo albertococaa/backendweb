@@ -1,0 +1,326 @@
+# Registro
+POST http://localhost:3000/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "albertococag2003+6@gmail.com",
+  "password": "Password123"
+}
+
+###
+
+# Login
+POST http://localhost:3000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "albertococag2003+6@gmail.com",
+  "password": "Password123"
+}
+
+###
+
+# Validar email (reemplaza TOKEN y CODE manualmente)
+POST http://localhost:3000/api/auth/validate-email
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQxMzE3NCwiZXhwIjoxNzQ2NDIwMzc0fQ.i6DSGhwzylU8s1DLneho7vkl9k6aAevcMaHOaj2tnho
+
+{
+  "code": "724416"
+}
+
+###
+
+# Obtener datos del usuario
+GET http://localhost:3000/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQxMzQxNiwiZXhwIjoxNzQ2NDIwNjE2fQ.ckxX3eGViC7au-8FUWkzPCRoWcnOmuPwZjd_mdLy74Y
+
+###
+
+# Onboarding (datos personales y compañía)
+PUT http://localhost:3000/api/auth/onboarding
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhZjk2YjhjOWE0MGZkNDQwZDZmZTIiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1MjUyMywiZXhwIjoxNzQzNDU5NzIzfQ.Uhx1IamI90Lim5Hflx5RJPejTsnOsmvyj5gWT-ZYxjY
+
+
+{
+  "name": "Juan",
+  "surname": "Pérez",
+  "nif": "12345678A",
+  "company": {
+    "name": "Mi Empresa S.L.",
+    "cif": "B12345678",
+    "address": "Calle Falsa 123"
+  }
+}
+
+###
+
+### Subir logo (máximo 2MB)
+PATCH http://localhost:3000/api/auth/logo
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViMDRhMzYzNGRkZmQyNTJjZTg5NTYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1NTM5NSwiZXhwIjoxNzQzNDYyNTk1fQ.cvgLEp2R3QyLqgm7A45TszBI8N98qYJubwF3zXvUE8M
+Content-Type: multipart/form-data; boundary=MyBoundary
+
+--MyBoundary
+Content-Disposition: form-data; name="logo"; filename="logo.png"
+Content-Type: image/png
+
+< C:/Users/alber/Downloads/logo.png
+--MyBoundary--
+
+###
+###
+PATCH http://localhost:3000/api/auth/67eb04a3634ddfd252ce8956
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViMDRhMzYzNGRkZmQyNTJjZTg5NTYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1NTkyNiwiZXhwIjoxNzQzNDYzMTI2fQ.sPL7HDLDhoiRZasRkztZwV0fCta2jsKFhjh64VB4Bhc
+
+{
+  "role": "admin"
+}
+
+###
+
+### Invitar a un usuario guest
+POST http://localhost:3000/api/auth/invite
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2ViMDRhMzYzNGRkZmQyNTJjZTg5NTYiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1NTkyNiwiZXhwIjoxNzQzNDYzMTI2fQ.sPL7HDLDhoiRZasRkztZwV0fCta2jsKFhjh64VB4Bhc
+Content-Type: application/json
+
+{
+  "email": "invitado@gmail.com"
+}
+
+###
+
+# Eliminar usuario (soft delete por defecto)
+DELETE http://localhost:3000/api/auth
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhNTM0NGU5ZDQ1ODQ0ODZjMjA5ODMiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1MzgwMiwiZXhwIjoxNzQzNDYxMDAyfQ.QZoLgsfFicBnpxWr034EM-yZjfvOFdwC8UoxPm72xOs
+
+
+###
+
+# Eliminar usuario (hard delete con parámetro)
+DELETE http://localhost:3000/api/auth?soft=false
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2VhZjY1YzBjZGM2YWRlOTQ4NjAxODQiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzQ1Mzk5OSwiZXhwIjoxNzQzNDYxMTk5fQ.mJfRTxHia1ISEUJBcQ340ipTO3SZus5zrM7eV0Q8PjE
+
+
+###
+
+# Recuperar contraseña
+POST http://localhost:3000/api/auth/reset-password
+Content-Type: application/json
+
+{
+  "email": "albertococag2003+2@gmail.com",
+  "newPassword": "NewPass456"
+}
+###
+
+### Crear cliente
+POST http://localhost:3000/api/client
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "name": "Cliente2 123 S.L.",
+  "contactEmail": "cliente@ejemplo.com",
+  "phone": "612345678",
+  "address": "Calle Falsa 123"
+}
+
+###
+
+### Actualizar cliente
+PUT http://localhost:3000/api/client/681892f5c646ba79dd5c8f2f
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "phone": "611171111"
+}
+
+###
+
+### Obtener todos los clientes
+GET http://localhost:3000/api/client
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Obtener un cliente concreto
+GET http://localhost:3000/api/client/681892f5c646ba79dd5c8f2f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+
+###
+
+### Archivar (soft delete)
+PATCH http://localhost:3000/api/client/681892f5c646ba79dd5c8f2f/archive
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+
+###
+
+### Listar archivados
+GET http://localhost:3000/api/client/archived/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+
+###
+
+### Restaurar archivado
+PATCH http://localhost:3000/api/client/681892f5c646ba79dd5c8f2f/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Eliminar (hard delete)
+DELETE http://localhost:3000/api/client/681892f5c646ba79dd5c8f2f
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+
+###
+### Crear proyecto
+POST http://localhost:3000/api/project
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "name": "Proyecto Instalación2",
+  "description": "Montaje de red y servidores",
+  "client": "68189685bf52f080f7aa0235"
+}
+
+###
+
+### Actualizar proyecto
+PUT http://localhost:3000/api/project/681897802957b82adcdaee35
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "description": "Montaje actualizado de red"
+}
+
+###
+
+### Obtener todos los proyectos
+GET http://localhost:3000/api/project
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Obtener un proyecto concreto
+GET http://localhost:3000/api/project/681897802957b82adcdaee35
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Archivar (soft delete)
+PATCH http://localhost:3000/api/project/681897802957b82adcdaee35/archive
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Listar archivados
+GET http://localhost:3000/api/project/archived/list
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Restaurar archivado
+PATCH http://localhost:3000/api/project/681897802957b82adcdaee35/restore
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Eliminar (hard delete)
+DELETE http://localhost:3000/api/project/681897802957b82adcdaee35
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+### Crear albarán (horas)
+POST http://localhost:3000/api/deliverynote
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "type": "hours",
+  "project": "681897312957b82adcdaee31",
+  "hours": [
+    {
+      "person": "Juan lopez",
+      "description": "Montaje equipo",
+      "hoursWorked": 5,
+      "date": "2024-05-01"
+    },
+    {
+      "person": "Laura Gómez",
+      "description": "Instalación red",
+      "hoursWorked": 3,
+      "date": "2024-05-01"
+    }
+  ]
+}
+
+###
+
+### Crear albarán (materiales)
+POST http://localhost:3000/api/deliverynote
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+{
+  "type": "materials",
+  "project": "681897312957b82adcdaee31",
+  "materials": [
+    {
+      "material": "Cable UTP",
+      "quantity": 100,
+      "unit": "metros",
+      "date": "2024-05-02"
+    },
+    {
+      "material": "Router WiFi",
+      "quantity": 2,
+      "unit": "unidades",
+      "date": "2024-05-02"
+    }
+  ]
+}
+
+###
+
+### Listar albaranes
+GET http://localhost:3000/api/deliverynote
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Obtener un albarán específico
+GET http://localhost:3000/api/deliverynote/681897f42957b82adcdaee4b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Generar y descargar PDF
+GET http://localhost:3000/api/deliverynote/pdf/681897f42957b82adcdaee4b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+
+###
+
+### Firmar albarán (subida de imagen)
+POST http://localhost:3000/api/deliverynote/681897f42957b82adcdaee4b/sign
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
+Content-Type: multipart/form-data; boundary=MyBoundary
+
+--MyBoundary
+Content-Disposition: form-data; name="signature"; filename="signature.png"
+Content-Type: image/png
+
+< ./signature.png
+--MyBoundary--
+
+###
+
+### Borrar albarán (solo si no está firmado)
+DELETE http://localhost:3000/api/deliverynote/68189aa669e110c5aec76ed4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2ODE4MjY3NjI1Y2JiMGIyN2IxNzI4YmUiLCJyb2xlIjoidXNlciIsImlhdCI6MTc0NjQ0MDU1NSwiZXhwIjoxNzQ2NDQ3NzU1fQ.-ndRu2KHSBN0Jn7dr0iURSdHK6w9Bn2vqJIIVmc4KMM
